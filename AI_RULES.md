@@ -2,6 +2,14 @@
 
 This file defines the strict operating procedures for any AI assistant working on the **Vault-Clothes** repository.
 
+## 0. The Golden Rule: Authority of Documentation
+
+- **Supreme Authority**: `REQUIREMENTS.md` and `ARCHITECTURE.md` are the absolute sources of truth.
+- **Conflict Resolution**:
+  - If a User Prompt conflicts with these files -> **Warn the user** (unless explicitly told to ignore).
+  - If `AI_RULES.md` conflicts with them -> Obey `REQUIREMENTS.md` / `ARCHITECTURE.md`.
+  - If ambiguity arises between them -> **STOP AND ASK**. Do not guess.
+
 ## 1. Architectural Enforcement (MVVM)
 
 - **Layered Architecture**: You must strictly adhere to the following separation of concerns:
