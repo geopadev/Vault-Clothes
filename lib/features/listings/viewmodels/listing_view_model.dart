@@ -31,7 +31,7 @@ class ListingViewModel extends BaseViewModel {
       final user = await _userManager.authStateChanges.first;
       if (user == null) throw Exception('Must be logged in to create listing');
 
-      List<String> imageUrls = [];
+      final List<String> imageUrls = [];
       final String listingId = const Uuid().v4();
 
       if (imageFile != null) {

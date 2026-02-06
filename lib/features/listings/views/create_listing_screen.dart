@@ -106,7 +106,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                     const SizedBox(height: 16),
 
                     DropdownButtonFormField<ItemCategory>(
-                      value: _selectedCategory,
+                      initialValue: _selectedCategory,
                       decoration: const InputDecoration(labelText: 'Category'),
                       items: ItemCategory.values.map((c) {
                         return DropdownMenuItem(value: c, child: Text(c.name));
@@ -116,7 +116,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                     const SizedBox(height: 16),
 
                     DropdownButtonFormField<ItemCondition>(
-                      value: _selectedCondition,
+                      initialValue: _selectedCondition,
                       decoration: const InputDecoration(labelText: 'Condition'),
                       items: ItemCondition.values.map((c) {
                         return DropdownMenuItem(value: c, child: Text(c.name));

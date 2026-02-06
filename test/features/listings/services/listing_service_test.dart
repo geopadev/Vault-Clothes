@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vault_clothes/core/services/database_connector.dart';
+import 'package:vault_clothes/features/listings/models/filter_options.dart';
 import 'package:vault_clothes/features/listings/models/listing_model.dart';
 import 'package:vault_clothes/features/listings/services/listing_service.dart';
 
@@ -61,6 +62,37 @@ void main() {
 
       expect(list, isA<List<ListingModel>>());
       expect(list.first.title, 'Shirt');
+    });
+    test('searchListings filters by text correctly', () async {
+      final tList = [
+        tListing.copyWith(title: 'Apple'),
+        tListing.copyWith(title: 'Banana'),
+      ];
+      
+      when(mockDb.collectionStream('listings', orderBy: anyNamed('orderBy'), descending: anyNamed('descending')))
+          .thenAnswer((_) => Stream.value(tList.map((e) => e.toJson()).toList()));
+
+      final stream = service.searchListings(const FilterOptions(searchQuery: 'app'));
+      final result = await stream.first;
+
+      expect(result.length, 1);
+      expect(result.first.title, 'Apple');
+    });
+
+    test('searchListings filters by category correctly', () async {
+      final tList = [
+        tListing.copyWith(category: ItemCategory.top),
+        tListing.copyWith(category: ItemCategory.bottom),
+      ];
+
+      when(mockDb.collectionStream('listings', orderBy: anyNamed('orderBy'), descending: anyNamed('descending')))
+          .thenAnswer((_) => Stream.value(tList.map((e) => e.toJson()).toList()));
+
+      final stream = service.searchListings(const FilterOptions(category: ItemCategory.top));
+      final result = await stream.first;
+
+      expect(result.length, 1);
+      expect(result.first.category, ItemCategory.top);
     });
   });
 }

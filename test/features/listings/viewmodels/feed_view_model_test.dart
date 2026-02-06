@@ -15,7 +15,7 @@ void main() {
   setUp(() {
     mockService = MockListingService();
     // Default stub
-    when(mockService.getFeed()).thenAnswer((_) => Stream.empty());
+    when(mockService.getFeed()).thenAnswer((_) => const Stream.empty());
   });
 
   group('FeedViewModel', () {

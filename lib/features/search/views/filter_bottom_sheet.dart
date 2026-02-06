@@ -27,109 +27,114 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
     return Container(
       padding: const EdgeInsets.all(16),
       width: double.infinity,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Filters', style: Theme.of(context).textTheme.headlineSmall),
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    _currentFilters = const FilterOptions();
-                  });
-                },
-                child: const Text('Reset'),
-              ),
-            ],
-          ),
-          const Divider(),
-
-          // Category
-          DropdownButtonFormField<ItemCategory>(
-            value: _currentFilters.category,
-            decoration: const InputDecoration(labelText: 'Category'),
-            items: ItemCategory.values.map((c) {
-              return DropdownMenuItem(value: c, child: Text(c.name));
-            }).toList(),
-            onChanged: (v) => setState(() {
-              _currentFilters = _currentFilters.copyWith(category: v);
-            }),
-          ),
-
-          const SizedBox(height: 16),
-
-          // Condition
-          DropdownButtonFormField<ItemCondition>(
-            value: _currentFilters.condition,
-            decoration: const InputDecoration(labelText: 'Condition'),
-            items: ItemCondition.values.map((c) {
-              return DropdownMenuItem(value: c, child: Text(c.name));
-            }).toList(),
-            onChanged: (v) => setState(() {
-              _currentFilters = _currentFilters.copyWith(condition: v);
-            }),
-          ),
-
-          const SizedBox(height: 16),
-
-          // Size
-          TextFormField(
-            initialValue: _currentFilters.size,
-            decoration: const InputDecoration(labelText: 'Size (Exact Match)'),
-            onChanged: (v) => setState(() {
-              _currentFilters = _currentFilters.copyWith(
-                size: v.isEmpty ? null : v,
-              );
-            }),
-          ),
-
-          const SizedBox(height: 16),
-
-          // Price Range (Simplified)
-          Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  initialValue: _currentFilters.minPrice?.toString(),
-                  decoration: const InputDecoration(labelText: 'Min Price'),
-                  keyboardType: TextInputType.number,
-                  onChanged: (v) => setState(() {
-                    _currentFilters = _currentFilters.copyWith(
-                      minPrice: double.tryParse(v),
-                    );
-                  }),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Filters', style: Theme.of(context).textTheme.headlineSmall),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      _currentFilters = const FilterOptions();
+                    });
+                  },
+                  child: const Text('Reset'),
                 ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: TextFormField(
-                  initialValue: _currentFilters.maxPrice?.toString(),
-                  decoration: const InputDecoration(labelText: 'Max Price'),
-                  keyboardType: TextInputType.number,
-                  onChanged: (v) => setState(() {
-                    _currentFilters = _currentFilters.copyWith(
-                      maxPrice: double.tryParse(v),
-                    );
-                  }),
-                ),
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 24),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context, _currentFilters);
-              },
-              child: const Text('Apply Filters'),
+              ],
             ),
-          ),
-        ],
+            const Divider(),
+  
+            // Category
+            DropdownButtonFormField<ItemCategory>(
+              initialValue: _currentFilters.category,
+              decoration: const InputDecoration(labelText: 'Category'),
+              items: ItemCategory.values.map((c) {
+                return DropdownMenuItem(value: c, child: Text(c.name));
+              }).toList(),
+              onChanged: (v) => setState(() {
+                _currentFilters = _currentFilters.copyWith(category: v);
+              }),
+            ),
+  
+            const SizedBox(height: 16),
+  
+            // Condition
+            DropdownButtonFormField<ItemCondition>(
+              initialValue: _currentFilters.condition,
+              decoration: const InputDecoration(labelText: 'Condition'),
+              items: ItemCondition.values.map((c) {
+                return DropdownMenuItem(value: c, child: Text(c.name));
+              }).toList(),
+              onChanged: (v) => setState(() {
+                _currentFilters = _currentFilters.copyWith(condition: v);
+              }),
+            ),
+  
+            const SizedBox(height: 16),
+  
+            // Size
+            TextFormField(
+              key: ValueKey('size_${_currentFilters.size}'),
+              initialValue: _currentFilters.size,
+              decoration: const InputDecoration(labelText: 'Size (Exact Match)'),
+              onChanged: (v) => setState(() {
+                _currentFilters = _currentFilters.copyWith(
+                  size: v.isEmpty ? null : v,
+                );
+              }),
+            ),
+  
+            const SizedBox(height: 16),
+  
+            // Price Range (Simplified)
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    key: ValueKey('min_${_currentFilters.minPrice}'),
+                    initialValue: _currentFilters.minPrice?.toString(),
+                    decoration: const InputDecoration(labelText: 'Min Price'),
+                    keyboardType: TextInputType.number,
+                    onChanged: (v) => setState(() {
+                      _currentFilters = _currentFilters.copyWith(
+                        minPrice: double.tryParse(v),
+                      );
+                    }),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: TextFormField(
+                    key: ValueKey('max_${_currentFilters.maxPrice}'),
+                    initialValue: _currentFilters.maxPrice?.toString(),
+                    decoration: const InputDecoration(labelText: 'Max Price'),
+                    keyboardType: TextInputType.number,
+                    onChanged: (v) => setState(() {
+                      _currentFilters = _currentFilters.copyWith(
+                        maxPrice: double.tryParse(v),
+                      );
+                    }),
+                  ),
+                ),
+              ],
+            ),
+  
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context, _currentFilters);
+                },
+                child: const Text('Apply Filters'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

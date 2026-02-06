@@ -47,7 +47,7 @@ class ListingService {
     // To avoid complex index management for this MVP, we will fetch the 'Feed' (or filter by one main field if possible)
     // and do advanced filtering in memory.
 
-    Stream<List<ListingModel>> stream = getFeed();
+    final Stream<List<ListingModel>> stream = getFeed();
 
     return stream.map((listings) {
       return listings.where((item) {
@@ -71,15 +71,18 @@ class ListingService {
 
         // 4. Size (Exact match for now)
         if (options.size != null && options.size!.isNotEmpty) {
-          if (item.size.toLowerCase() != options.size!.toLowerCase())
+          if (item.size.toLowerCase() != options.size!.toLowerCase()) {
             return false;
+          }
         }
 
         // 5. Price Range
-        if (options.minPrice != null && item.price < options.minPrice!)
+        if (options.minPrice != null && item.price < options.minPrice!) {
           return false;
-        if (options.maxPrice != null && item.price > options.maxPrice!)
+        }
+        if (options.maxPrice != null && item.price > options.maxPrice!) {
           return false;
+        }
 
         return true;
       }).toList();

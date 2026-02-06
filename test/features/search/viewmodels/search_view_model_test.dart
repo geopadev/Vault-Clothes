@@ -53,7 +53,7 @@ void main() {
         // Wait, let's check SearchViewModel implementation.
         // Yes, filters update the subject, so they are also debounced.
 
-        final filters = const FilterOptions(category: ItemCategory.top);
+        const filters = FilterOptions(category: ItemCategory.top);
         viewModel.updateFilters(filters);
 
         expect(viewModel.filterOptions.category, ItemCategory.top);
