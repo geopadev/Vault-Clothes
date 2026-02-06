@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vault_clothes/core/services/service_locator.dart';
+import 'package:vault_clothes/features/auth/services/user_account_manager.dart';
+import 'package:vault_clothes/features/auth/views/login_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -26,11 +29,38 @@ class VaultClothesApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Vault Clothes Initialized'),
-        ),
-      ),
+      home: const AuthWrapper(),
+    );
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // We can access the auth stream directly from the manager or a simplified provider
+    // For now, let's use a StreamBuilder on the AccountAuthentication service (or Manager)
+    // Note: Ideally this logic lives in a ViewModel, but for the root wrapper, simple stream usage is common.
+    final authManager = getIt<UserAccountManager>();
+    
+    return StreamBuilder<User?>(
+      stream: authManager.authStateChanges,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(body: Center(child: CircularProgressIndicator()));
+        }
+
+        if (snapshot.hasData) {
+          return const Scaffold(
+            body: Center(
+              child: Text('User Logged In! (Home Screen Placeholder)'),
+            ),
+          );
+        }
+
+        return const LoginScreen();
+      },
     );
   }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "126162450866",
+    "project_id": "vault-clothes-app",
+    "storage_bucket": "vault-clothes-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126162450866:android:169e333c3b2f0d0c2e8cab",
+        "android_client_info": {
+          "package_name": "com.vaultclothes.vault_clothes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBExGg1kutXZQyjHCeuxRFQ4pX23d-T1N4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -17,22 +17,13 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -54,4 +45,31 @@ class DefaultFirebaseOptions {
         );
     }
   }
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyCKCJHZIy647rZAOv-lf7pmkn1pPMkgLAA',
+    appId: '1:126162450866:web:8914841c341307cd2e8cab',
+    messagingSenderId: '126162450866',
+    projectId: 'vault-clothes-app',
+    authDomain: 'vault-clothes-app.firebaseapp.com',
+    storageBucket: 'vault-clothes-app.firebasestorage.app',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyC8T2LF1yPBIVkMCzEw5K32Le8C5nXRlhg',
+    appId: '1:126162450866:ios:7ca72110f527226f2e8cab',
+    messagingSenderId: '126162450866',
+    projectId: 'vault-clothes-app',
+    storageBucket: 'vault-clothes-app.firebasestorage.app',
+    iosBundleId: 'com.vaultclothes.vaultClothes',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyBExGg1kutXZQyjHCeuxRFQ4pX23d-T1N4',
+    appId: '1:126162450866:android:169e333c3b2f0d0c2e8cab',
+    messagingSenderId: '126162450866',
+    projectId: 'vault-clothes-app',
+    storageBucket: 'vault-clothes-app.firebasestorage.app',
+  );
+
 }
