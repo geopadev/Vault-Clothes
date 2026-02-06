@@ -4,14 +4,16 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
-import 'dart:io' as _i7;
+import 'dart:io' as _i8;
 
 import 'package:firebase_auth/firebase_auth.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i8;
-import 'package:vault_clothes/core/services/storage_service.dart' as _i6;
+import 'package:mockito/src/dummies.dart' as _i9;
+import 'package:vault_clothes/core/services/storage_service.dart' as _i7;
 import 'package:vault_clothes/features/auth/services/user_account_manager.dart'
-    as _i9;
+    as _i10;
+import 'package:vault_clothes/features/listings/models/filter_options.dart'
+    as _i6;
 import 'package:vault_clothes/features/listings/models/listing_model.dart'
     as _i5;
 import 'package:vault_clothes/features/listings/services/listing_service.dart'
@@ -107,6 +109,18 @@ class MockListingService extends _i1.Mock implements _i3.ListingService {
           as _i4.Stream<List<_i5.ListingModel>>);
 
   @override
+  _i4.Stream<List<_i5.ListingModel>> searchListings(
+    _i6.FilterOptions? options,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#searchListings, [options]),
+            returnValue: _i4.Stream<List<_i5.ListingModel>>.empty(),
+            returnValueForMissingStub:
+                _i4.Stream<List<_i5.ListingModel>>.empty(),
+          )
+          as _i4.Stream<List<_i5.ListingModel>>);
+
+  @override
   _i4.Future<void> deleteListing(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#deleteListing, [id]),
@@ -119,19 +133,19 @@ class MockListingService extends _i1.Mock implements _i3.ListingService {
 /// A class which mocks [StorageService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockStorageService extends _i1.Mock implements _i6.StorageService {
+class MockStorageService extends _i1.Mock implements _i7.StorageService {
   @override
-  _i4.Future<String> uploadImage(_i7.File? file, String? path) =>
+  _i4.Future<String> uploadImage(_i8.File? file, String? path) =>
       (super.noSuchMethod(
             Invocation.method(#uploadImage, [file, path]),
             returnValue: _i4.Future<String>.value(
-              _i8.dummyValue<String>(
+              _i9.dummyValue<String>(
                 this,
                 Invocation.method(#uploadImage, [file, path]),
               ),
             ),
             returnValueForMissingStub: _i4.Future<String>.value(
-              _i8.dummyValue<String>(
+              _i9.dummyValue<String>(
                 this,
                 Invocation.method(#uploadImage, [file, path]),
               ),
@@ -153,7 +167,7 @@ class MockStorageService extends _i1.Mock implements _i6.StorageService {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserAccountManager extends _i1.Mock
-    implements _i9.UserAccountManager {
+    implements _i10.UserAccountManager {
   @override
   _i4.Stream<_i2.User?> get authStateChanges =>
       (super.noSuchMethod(
@@ -249,8 +263,8 @@ class MockUser extends _i1.Mock implements _i2.User {
   String get uid =>
       (super.noSuchMethod(
             Invocation.getter(#uid),
-            returnValue: _i8.dummyValue<String>(this, Invocation.getter(#uid)),
-            returnValueForMissingStub: _i8.dummyValue<String>(
+            returnValue: _i9.dummyValue<String>(this, Invocation.getter(#uid)),
+            returnValueForMissingStub: _i9.dummyValue<String>(
               this,
               Invocation.getter(#uid),
             ),

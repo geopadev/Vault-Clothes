@@ -6,6 +6,7 @@ import 'package:vault_clothes/features/auth/viewmodels/auth_view_model.dart';
 import 'package:vault_clothes/features/listings/viewmodels/feed_view_model.dart';
 import 'package:vault_clothes/features/listings/views/create_listing_screen.dart';
 import 'package:vault_clothes/features/listings/views/listing_detail_screen.dart';
+import 'package:vault_clothes/features/search/views/search_screen.dart';
 
 class FeedScreen extends StatelessWidget {
   const FeedScreen({super.key});
@@ -18,6 +19,14 @@ class FeedScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Vault Clothes'),
           actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (_) => const SearchScreen()));
+              },
+            ),
             IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () {

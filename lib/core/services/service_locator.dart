@@ -8,6 +8,7 @@ import 'package:vault_clothes/core/services/storage_service.dart';
 import 'package:vault_clothes/features/listings/services/listing_service.dart';
 import 'package:vault_clothes/features/listings/viewmodels/feed_view_model.dart';
 import 'package:vault_clothes/features/listings/viewmodels/listing_view_model.dart';
+import 'package:vault_clothes/features/search/viewmodels/search_view_model.dart';
 
 final getIt = GetIt.instance;
 
@@ -34,4 +35,5 @@ void setupLocator() {
     () => ListingViewModel(getIt(), getIt(), getIt()),
   );
   getIt.registerFactory<FeedViewModel>(() => FeedViewModel(getIt()));
+  getIt.registerFactory<SearchViewModel>(() => SearchViewModel(getIt()));
 }
