@@ -1,0 +1,47 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Firebase
+firebase-debug.log
+.firebaserc
+firebase.json
+.firestore/
+.functions/
+
+# Environment files
+.env
+.env.*
+*.keystore
+*.jks
+
+# Platform-specific
+android/.gradle/
+android/local.properties
+android/key.properties
+android/app/debug/
+android/app/profile/
+android/app/release/
+
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/ephemeral/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/Flutter.podspec
+
+# Web
+web/.dart_tool/
+web/build/
+
+# Logs
+*.log
