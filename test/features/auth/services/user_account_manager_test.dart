@@ -46,13 +46,19 @@ void main() {
       );
 
       verify(mockAuth.register('test@test.com', 'password')).called(1);
-      verify(mockDb.saveDocument(
-        'users',
-        '123',
-        argThat(predicate<Map<String, dynamic>>((map) =>
-            map['email'] == 'test@test.com' &&
-            map['displayName'] == 'Test User')),
-      )).called(1);
+      verify(
+        mockDb.saveDocument(
+          'users',
+          '123',
+          argThat(
+            predicate<Map<String, dynamic>>(
+              (map) =>
+                  map['email'] == 'test@test.com' &&
+                  map['displayName'] == 'Test User',
+            ),
+          ),
+        ),
+      ).called(1);
     });
 
     test('register throws if user is null', () async {

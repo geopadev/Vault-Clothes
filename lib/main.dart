@@ -4,14 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vault_clothes/core/services/service_locator.dart';
 import 'package:vault_clothes/features/auth/services/user_account_manager.dart';
 import 'package:vault_clothes/features/auth/views/login_screen.dart';
+import 'package:vault_clothes/features/listings/views/feed_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   setupLocator();
 
@@ -43,20 +42,18 @@ class AuthWrapper extends StatelessWidget {
     // For now, let's use a StreamBuilder on the AccountAuthentication service (or Manager)
     // Note: Ideally this logic lives in a ViewModel, but for the root wrapper, simple stream usage is common.
     final authManager = getIt<UserAccountManager>();
-    
+
     return StreamBuilder<User?>(
       stream: authManager.authStateChanges,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
 
         if (snapshot.hasData) {
-          return const Scaffold(
-            body: Center(
-              child: Text('User Logged In! (Home Screen Placeholder)'),
-            ),
-          );
+          return const FeedScreen();
         }
 
         return const LoginScreen();

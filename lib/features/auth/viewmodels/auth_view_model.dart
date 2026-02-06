@@ -30,7 +30,11 @@ class AuthViewModel extends BaseViewModel {
     });
   }
 
-  Future<void> register(String email, String password, String displayName) async {
+  Future<void> register(
+    String email,
+    String password,
+    String displayName,
+  ) async {
     await runSafe(() async {
       await _userAccountManager.register(
         email: email,

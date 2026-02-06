@@ -5,24 +5,38 @@ class FirestoreDatabaseConnector implements DatabaseConnector {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
-  Future<Map<String, dynamic>?> getDocument(String collection, String id) async {
+  Future<Map<String, dynamic>?> getDocument(
+    String collection,
+    String id,
+  ) async {
     final doc = await _firestore.collection(collection).doc(id).get();
     return doc.data();
   }
 
   @override
-  Future<void> saveDocument(String collection, String id, Map<String, dynamic> data) async {
+  Future<void> saveDocument(
+    String collection,
+    String id,
+    Map<String, dynamic> data,
+  ) async {
     await _firestore.collection(collection).doc(id).set(data);
   }
 
   @override
-  Future<String> addDocument(String collection, Map<String, dynamic> data) async {
+  Future<String> addDocument(
+    String collection,
+    Map<String, dynamic> data,
+  ) async {
     final docRef = await _firestore.collection(collection).add(data);
     return docRef.id;
   }
 
   @override
-  Future<void> updateDocument(String collection, String id, Map<String, dynamic> data) async {
+  Future<void> updateDocument(
+    String collection,
+    String id,
+    Map<String, dynamic> data,
+  ) async {
     await _firestore.collection(collection).doc(id).update(data);
   }
 
@@ -32,7 +46,8 @@ class FirestoreDatabaseConnector implements DatabaseConnector {
   }
 
   @override
-  Stream<List<Map<String, dynamic>>> collectionStream(String collection, {
+  Stream<List<Map<String, dynamic>>> collectionStream(
+    String collection, {
     String? orderBy,
     bool descending = false,
     int? limit,
@@ -48,7 +63,9 @@ class FirestoreDatabaseConnector implements DatabaseConnector {
     }
 
     return query.snapshots().map((snapshot) {
-      return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+      return snapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
     });
   }
 }

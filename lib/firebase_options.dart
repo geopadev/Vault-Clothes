@@ -71,5 +71,4 @@ class DefaultFirebaseOptions {
     projectId: 'vault-clothes-app',
     storageBucket: 'vault-clothes-app.firebasestorage.app',
   );
-
 }

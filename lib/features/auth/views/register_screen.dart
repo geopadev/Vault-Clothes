@@ -45,12 +45,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         padding: const EdgeInsets.only(bottom: 16.0),
                         child: Text(
                           viewModel.error!,
-                          style: TextStyle(color: Theme.of(context).colorScheme.error),
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.error,
+                          ),
                         ),
                       ),
                     TextFormField(
                       controller: _displayNameController,
-                      decoration: const InputDecoration(labelText: 'Display Name'),
+                      decoration: const InputDecoration(
+                        labelText: 'Display Name',
+                      ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter a display name';
@@ -90,7 +94,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _confirmPasswordController,
-                      decoration: const InputDecoration(labelText: 'Confirm Password'),
+                      decoration: const InputDecoration(
+                        labelText: 'Confirm Password',
+                      ),
                       obscureText: true,
                       validator: (value) {
                         if (value != _passwordController.text) {
@@ -112,7 +118,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               _displayNameController.text.trim(),
                             );
                             if (!viewModel.hasError && context.mounted) {
-                              Navigator.of(context).pop(); // Go back to login on success
+                              Navigator.of(
+                                context,
+                              ).pop(); // Go back to login on success
                             }
                           }
                         },

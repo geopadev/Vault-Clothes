@@ -4,14 +4,24 @@ import 'package:vault_clothes/core/services/firestore_database_connector.dart';
 import 'package:vault_clothes/features/auth/services/account_authentication.dart';
 import 'package:vault_clothes/features/auth/services/user_account_manager.dart';
 import 'package:vault_clothes/features/auth/viewmodels/auth_view_model.dart';
+import 'package:vault_clothes/core/services/storage_service.dart';
+import 'package:vault_clothes/features/listings/services/listing_service.dart';
+import 'package:vault_clothes/features/listings/viewmodels/feed_view_model.dart';
+import 'package:vault_clothes/features/listings/viewmodels/listing_view_model.dart';
 
 final getIt = GetIt.instance;
 
 /// Setup dependency injection for the app.
 void setupLocator() {
   // Services
-  getIt.registerLazySingleton<DatabaseConnector>(() => FirestoreDatabaseConnector());
-  getIt.registerLazySingleton<AccountAuthentication>(() => AccountAuthentication());
+  getIt.registerLazySingleton<DatabaseConnector>(
+    () => FirestoreDatabaseConnector(),
+  );
+  getIt.registerLazySingleton<AccountAuthentication>(
+    () => AccountAuthentication(),
+  );
+  getIt.registerLazySingleton<StorageService>(() => StorageService());
+  getIt.registerLazySingleton<ListingService>(() => ListingService(getIt()));
 
   // Managers
   getIt.registerLazySingleton<UserAccountManager>(
@@ -20,4 +30,8 @@ void setupLocator() {
 
   // ViewModels
   getIt.registerFactory<AuthViewModel>(() => AuthViewModel(getIt()));
+  getIt.registerFactory<ListingViewModel>(
+    () => ListingViewModel(getIt(), getIt(), getIt()),
+  );
+  getIt.registerFactory<FeedViewModel>(() => FeedViewModel(getIt()));
 }

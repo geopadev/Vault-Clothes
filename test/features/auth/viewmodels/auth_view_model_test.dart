@@ -6,10 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:vault_clothes/features/auth/services/user_account_manager.dart';
 import 'package:vault_clothes/features/auth/viewmodels/auth_view_model.dart';
 
-@GenerateNiceMocks([
-  MockSpec<UserAccountManager>(),
-  MockSpec<User>(),
-])
+@GenerateNiceMocks([MockSpec<UserAccountManager>(), MockSpec<User>()])
 import 'auth_view_model_test.mocks.dart';
 
 void main() {
@@ -20,8 +17,10 @@ void main() {
   setUp(() {
     mockManager = MockUserAccountManager();
     authStateController = StreamController<User?>();
-    when(mockManager.authStateChanges).thenAnswer((_) => authStateController.stream);
-    
+    when(
+      mockManager.authStateChanges,
+    ).thenAnswer((_) => authStateController.stream);
+
     viewModel = AuthViewModel(mockManager);
   });
 
@@ -33,10 +32,10 @@ void main() {
     test('initial state listens to auth changes', () async {
       final mockUser = MockUser();
       authStateController.add(mockUser);
-      
+
       // Wait for stream to emit
       await Future.delayed(Duration.zero);
-      
+
       expect(viewModel.currentUser, mockUser);
       expect(viewModel.isAuthenticated, true);
     });
@@ -49,20 +48,22 @@ void main() {
 
     test('login sets error on failure', () async {
       when(mockManager.login(any, any)).thenThrow(Exception('Auth Failed'));
-      
+
       await viewModel.login('t@t.com', 'pass');
-      
+
       expect(viewModel.hasError, true);
       expect(viewModel.error, contains('Auth Failed'));
     });
 
     test('register calls manager.register', () async {
       await viewModel.register('t@t.com', 'pass', 'Name');
-      verify(mockManager.register(
-        email: 't@t.com',
-        password: 'pass',
-        displayName: 'Name',
-      )).called(1);
+      verify(
+        mockManager.register(
+          email: 't@t.com',
+          password: 'pass',
+          displayName: 'Name',
+        ),
+      ).called(1);
     });
   });
 }
