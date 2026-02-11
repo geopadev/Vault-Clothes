@@ -5,6 +5,8 @@ import 'package:vault_clothes/features/auth/services/account_authentication.dart
 import 'package:vault_clothes/features/auth/services/user_account_manager.dart';
 import 'package:vault_clothes/features/auth/viewmodels/auth_view_model.dart';
 import 'package:vault_clothes/core/services/storage_service.dart';
+import 'package:vault_clothes/features/favorites/services/favorites_service.dart';
+import 'package:vault_clothes/features/favorites/viewmodels/favorites_view_model.dart';
 import 'package:vault_clothes/features/listings/services/listing_service.dart';
 import 'package:vault_clothes/features/listings/viewmodels/feed_view_model.dart';
 import 'package:vault_clothes/features/listings/viewmodels/listing_view_model.dart';
@@ -23,6 +25,13 @@ void setupLocator() {
   );
   getIt.registerLazySingleton<StorageService>(() => StorageService());
   getIt.registerLazySingleton<ListingService>(() => ListingService(getIt()));
+  getIt.registerLazySingleton<FavoritesService>(
+    () => FavoritesService(
+      getIt<DatabaseConnector>(),
+      getIt<AccountAuthentication>(),
+      getIt<ListingService>(),
+    ),
+  );
 
   // Managers
   getIt.registerLazySingleton<UserAccountManager>(
@@ -36,4 +45,5 @@ void setupLocator() {
   );
   getIt.registerFactory<FeedViewModel>(() => FeedViewModel(getIt()));
   getIt.registerFactory<SearchViewModel>(() => SearchViewModel(getIt()));
+  getIt.registerFactory<FavoritesViewModel>(() => FavoritesViewModel(getIt()));
 }

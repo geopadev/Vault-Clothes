@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:uuid/uuid.dart';
-import 'package:vault_clothes/core/services/service_locator.dart';
 import 'package:vault_clothes/core/services/storage_service.dart';
 import 'package:vault_clothes/core/viewmodels/base_view_model.dart';
 import 'package:vault_clothes/features/auth/services/user_account_manager.dart';

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vault_clothes/features/listings/models/filter_options.dart';
 import 'package:vault_clothes/features/listings/models/listing_model.dart';
-import 'package:vault_clothes/features/search/viewmodels/search_view_model.dart';
-import 'package:provider/provider.dart';
 
 class FilterBottomSheet extends StatefulWidget {
   final FilterOptions initialFilters;
