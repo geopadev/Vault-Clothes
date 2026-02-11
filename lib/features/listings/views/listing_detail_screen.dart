@@ -5,6 +5,7 @@ import 'package:vault_clothes/core/services/service_locator.dart';
 import 'package:vault_clothes/features/favorites/viewmodels/favorites_view_model.dart';
 import 'package:vault_clothes/features/favorites/views/widgets/favorite_button.dart';
 import 'package:vault_clothes/features/listings/models/listing_model.dart';
+import 'package:vault_clothes/features/trust/views/public_profile_screen.dart';
 
 class ListingDetailScreen extends StatelessWidget {
   final ListingModel listing;
@@ -93,6 +94,23 @@ class ListingDetailScreen extends StatelessWidget {
                     Text(listing.description),
 
                     const SizedBox(height: 32),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PublicProfileScreen(
+                                sellerId: listing.sellerId,
+                                sellerName: 'Loading...', // Name will load in screen
+                              ),
+                            ),
+                          );
+                        },
+                        child: const Text('View Seller Profile'),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(

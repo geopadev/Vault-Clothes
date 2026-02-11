@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vault_clothes/features/auth/models/user_model.dart';
 import 'package:vault_clothes/features/listings/models/listing_model.dart';
 import 'package:vault_clothes/features/listings/services/listing_service.dart';
 import 'package:vault_clothes/features/trust/models/review_model.dart';
@@ -52,6 +53,13 @@ void main() {
     createdAt: DateTime(2023),
   );
 
+  final testUser = UserModel(
+    uid: 's1',
+    email: 'test@example.com',
+    displayName: 'Test Seller',
+    createdAt: DateTime(2023),
+  );
+
   setUp(() {
     mockTrustManager = MockTrustInfoManager();
     mockListingService = MockListingService();
@@ -65,6 +73,8 @@ void main() {
         .thenAnswer((_) async => [testReview]);
     when(mockListingService.getUserListings('s1'))
         .thenAnswer((_) => Stream.value([testListing]));
+    when(mockTrustManager.getSellerProfile('s1'))
+        .thenAnswer((_) async => testUser);
 
     expect(viewModel.isLoading, false);
     
@@ -76,6 +86,7 @@ void main() {
     expect(viewModel.reviews.first, testReview);
     expect(viewModel.listings.length, 1);
     expect(viewModel.listings.first, testListing);
+    expect(viewModel.sellerName, 'Test Seller');
     expect(viewModel.isLoading, false);
   });
 

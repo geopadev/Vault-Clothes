@@ -2,11 +2,19 @@ import 'package:vault_clothes/core/services/database_connector.dart';
 import 'package:vault_clothes/features/trust/models/review_model.dart';
 import 'package:vault_clothes/features/trust/models/trust_info_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:vault_clothes/features/auth/models/user_model.dart';
 
 class TrustInfoManager {
   final DatabaseConnector _db;
 
   TrustInfoManager(this._db);
+
+  /// Fetches the user profile (for name/avatar).
+  Future<UserModel?> getSellerProfile(String sellerId) async {
+    final data = await _db.getDocument('users', sellerId);
+    if (data == null) return null;
+    return UserModel.fromJson(data);
+  }
 
   /// Fetches the trust info for a given seller.
   /// If no info exists, returns a default 'new seller' profile.

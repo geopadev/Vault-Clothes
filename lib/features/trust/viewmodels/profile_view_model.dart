@@ -1,4 +1,5 @@
 import 'package:vault_clothes/core/viewmodels/base_view_model.dart';
+import 'package:vault_clothes/features/auth/models/user_model.dart';
 import 'package:vault_clothes/features/listings/models/listing_model.dart';
 import 'package:vault_clothes/features/listings/services/listing_service.dart';
 import 'package:vault_clothes/features/trust/models/review_model.dart';
@@ -12,12 +13,14 @@ class ProfileViewModel extends BaseViewModel {
   TrustInfoModel? _trustInfo;
   List<ReviewModel> _reviews = [];
   List<ListingModel> _listings = [];
+  String _sellerName = '';
 
   ProfileViewModel(this._trustManager, this._listingService);
 
   TrustInfoModel? get trustInfo => _trustInfo;
   List<ReviewModel> get reviews => _reviews;
   List<ListingModel> get listings => _listings;
+  String get sellerName => _sellerName;
 
   List<ListingModel> get activeListings =>
       _listings.where((l) => !l.isSold).toList();
@@ -32,11 +35,15 @@ class ProfileViewModel extends BaseViewModel {
         _trustManager.getTrustInfo(sellerId),
         _trustManager.getReviews(sellerId),
         _listingService.getUserListings(sellerId).first,
+        _trustManager.getSellerProfile(sellerId), // New fetch
       ]);
 
       _trustInfo = results[0] as TrustInfoModel;
       _reviews = results[1] as List<ReviewModel>;
       _listings = results[2] as List<ListingModel>;
+      
+      final user = results[3] as UserModel?;
+      _sellerName = user?.displayName ?? 'Seller';
     });
   }
 }

@@ -11,6 +11,8 @@ import 'package:vault_clothes/features/listings/services/listing_service.dart';
 import 'package:vault_clothes/features/listings/viewmodels/feed_view_model.dart';
 import 'package:vault_clothes/features/listings/viewmodels/listing_view_model.dart';
 import 'package:vault_clothes/features/search/viewmodels/search_view_model.dart';
+import 'package:vault_clothes/features/trust/services/trust_info_manager.dart';
+import 'package:vault_clothes/features/trust/viewmodels/profile_view_model.dart';
 
 final getIt = GetIt.instance;
 
@@ -32,6 +34,9 @@ void setupLocator() {
       getIt<ListingService>(),
     ),
   );
+  getIt.registerLazySingleton<TrustInfoManager>(
+    () => TrustInfoManager(getIt<DatabaseConnector>()),
+  );
 
   // Managers
   getIt.registerLazySingleton<UserAccountManager>(
@@ -46,4 +51,8 @@ void setupLocator() {
   getIt.registerFactory<FeedViewModel>(() => FeedViewModel(getIt()));
   getIt.registerFactory<SearchViewModel>(() => SearchViewModel(getIt()));
   getIt.registerFactory<FavoritesViewModel>(() => FavoritesViewModel(getIt()));
+  getIt.registerFactory<ProfileViewModel>(() => ProfileViewModel(
+        getIt<TrustInfoManager>(),
+        getIt<ListingService>(),
+      ));
 }

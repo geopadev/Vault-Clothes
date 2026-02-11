@@ -6,13 +6,14 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:vault_clothes/features/auth/models/user_model.dart' as _i5;
 import 'package:vault_clothes/features/listings/models/filter_options.dart'
-    as _i8;
+    as _i9;
 import 'package:vault_clothes/features/listings/models/listing_model.dart'
-    as _i7;
+    as _i8;
 import 'package:vault_clothes/features/listings/services/listing_service.dart'
-    as _i6;
-import 'package:vault_clothes/features/trust/models/review_model.dart' as _i5;
+    as _i7;
+import 'package:vault_clothes/features/trust/models/review_model.dart' as _i6;
 import 'package:vault_clothes/features/trust/models/trust_info_model.dart'
     as _i2;
 import 'package:vault_clothes/features/trust/services/trust_info_manager.dart'
@@ -44,6 +45,15 @@ class _FakeTrustInfoModel_0 extends _i1.SmartFake
 /// See the documentation for Mockito's code generation for more information.
 class MockTrustInfoManager extends _i1.Mock implements _i3.TrustInfoManager {
   @override
+  _i4.Future<_i5.UserModel?> getSellerProfile(String? sellerId) =>
+      (super.noSuchMethod(
+            Invocation.method(#getSellerProfile, [sellerId]),
+            returnValue: _i4.Future<_i5.UserModel?>.value(),
+            returnValueForMissingStub: _i4.Future<_i5.UserModel?>.value(),
+          )
+          as _i4.Future<_i5.UserModel?>);
+
+  @override
   _i4.Future<_i2.TrustInfoModel> getTrustInfo(String? sellerId) =>
       (super.noSuchMethod(
             Invocation.method(#getTrustInfo, [sellerId]),
@@ -63,41 +73,41 @@ class MockTrustInfoManager extends _i1.Mock implements _i3.TrustInfoManager {
           as _i4.Future<_i2.TrustInfoModel>);
 
   @override
-  _i4.Stream<List<_i5.ReviewModel>> getReviewsStream(
+  _i4.Stream<List<_i6.ReviewModel>> getReviewsStream(
     String? sellerId, {
     int? limit = 10,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#getReviewsStream, [sellerId], {#limit: limit}),
-            returnValue: _i4.Stream<List<_i5.ReviewModel>>.empty(),
+            returnValue: _i4.Stream<List<_i6.ReviewModel>>.empty(),
             returnValueForMissingStub:
-                _i4.Stream<List<_i5.ReviewModel>>.empty(),
+                _i4.Stream<List<_i6.ReviewModel>>.empty(),
           )
-          as _i4.Stream<List<_i5.ReviewModel>>);
+          as _i4.Stream<List<_i6.ReviewModel>>);
 
   @override
-  _i4.Future<List<_i5.ReviewModel>> getReviews(
+  _i4.Future<List<_i6.ReviewModel>> getReviews(
     String? sellerId, {
     int? limit = 10,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#getReviews, [sellerId], {#limit: limit}),
-            returnValue: _i4.Future<List<_i5.ReviewModel>>.value(
-              <_i5.ReviewModel>[],
+            returnValue: _i4.Future<List<_i6.ReviewModel>>.value(
+              <_i6.ReviewModel>[],
             ),
-            returnValueForMissingStub: _i4.Future<List<_i5.ReviewModel>>.value(
-              <_i5.ReviewModel>[],
+            returnValueForMissingStub: _i4.Future<List<_i6.ReviewModel>>.value(
+              <_i6.ReviewModel>[],
             ),
           )
-          as _i4.Future<List<_i5.ReviewModel>>);
+          as _i4.Future<List<_i6.ReviewModel>>);
 }
 
 /// A class which mocks [ListingService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockListingService extends _i1.Mock implements _i6.ListingService {
+class MockListingService extends _i1.Mock implements _i7.ListingService {
   @override
-  _i4.Future<void> createListing(_i7.ListingModel? listing) =>
+  _i4.Future<void> createListing(_i8.ListingModel? listing) =>
       (super.noSuchMethod(
             Invocation.method(#createListing, [listing]),
             returnValue: _i4.Future<void>.value(),
@@ -106,45 +116,45 @@ class MockListingService extends _i1.Mock implements _i6.ListingService {
           as _i4.Future<void>);
 
   @override
-  _i4.Future<_i7.ListingModel?> getListing(String? id) =>
+  _i4.Future<_i8.ListingModel?> getListing(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#getListing, [id]),
-            returnValue: _i4.Future<_i7.ListingModel?>.value(),
-            returnValueForMissingStub: _i4.Future<_i7.ListingModel?>.value(),
+            returnValue: _i4.Future<_i8.ListingModel?>.value(),
+            returnValueForMissingStub: _i4.Future<_i8.ListingModel?>.value(),
           )
-          as _i4.Future<_i7.ListingModel?>);
+          as _i4.Future<_i8.ListingModel?>);
 
   @override
-  _i4.Stream<List<_i7.ListingModel>> getFeed() =>
+  _i4.Stream<List<_i8.ListingModel>> getFeed() =>
       (super.noSuchMethod(
             Invocation.method(#getFeed, []),
-            returnValue: _i4.Stream<List<_i7.ListingModel>>.empty(),
+            returnValue: _i4.Stream<List<_i8.ListingModel>>.empty(),
             returnValueForMissingStub:
-                _i4.Stream<List<_i7.ListingModel>>.empty(),
+                _i4.Stream<List<_i8.ListingModel>>.empty(),
           )
-          as _i4.Stream<List<_i7.ListingModel>>);
+          as _i4.Stream<List<_i8.ListingModel>>);
 
   @override
-  _i4.Stream<List<_i7.ListingModel>> getUserListings(String? userId) =>
+  _i4.Stream<List<_i8.ListingModel>> getUserListings(String? userId) =>
       (super.noSuchMethod(
             Invocation.method(#getUserListings, [userId]),
-            returnValue: _i4.Stream<List<_i7.ListingModel>>.empty(),
+            returnValue: _i4.Stream<List<_i8.ListingModel>>.empty(),
             returnValueForMissingStub:
-                _i4.Stream<List<_i7.ListingModel>>.empty(),
+                _i4.Stream<List<_i8.ListingModel>>.empty(),
           )
-          as _i4.Stream<List<_i7.ListingModel>>);
+          as _i4.Stream<List<_i8.ListingModel>>);
 
   @override
-  _i4.Stream<List<_i7.ListingModel>> searchListings(
-    _i8.FilterOptions? options,
+  _i4.Stream<List<_i8.ListingModel>> searchListings(
+    _i9.FilterOptions? options,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#searchListings, [options]),
-            returnValue: _i4.Stream<List<_i7.ListingModel>>.empty(),
+            returnValue: _i4.Stream<List<_i8.ListingModel>>.empty(),
             returnValueForMissingStub:
-                _i4.Stream<List<_i7.ListingModel>>.empty(),
+                _i4.Stream<List<_i8.ListingModel>>.empty(),
           )
-          as _i4.Stream<List<_i7.ListingModel>>);
+          as _i4.Stream<List<_i8.ListingModel>>);
 
   @override
   _i4.Future<void> deleteListing(String? id) =>
