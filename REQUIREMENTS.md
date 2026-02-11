@@ -62,6 +62,17 @@
 - **Accessibility**: Must meet **WCAG 2.1 AA** standards (ARIA labels, contrast, keyboard navigation).
 - **Responsiveness**: UI must adapt consistently to mobile and web viewports.
 
+### 2.4 Design Aesthetics (Vinted-like)
+
+- **Visual Style**: Clean, minimalist interface with a focus on high-quality product imagery.
+- **Color Palette**: Use neutral backgrounds (whites, light greys) to make items pop. Primary action buttons should be distinct (e.g., teal/green or similar standard ecommerce colors) but not overwhelming.
+- **Layout**:
+  - **Feed**: Masonry or Grid layout for items.
+  - **Navigation**: Simple bottom navigation bar (Home, Search, Sell, Inbox, Profile).
+  - **Chat**: Conversation view should include a context header showing the item being discussed.
+- **Micro-interactions**: Smooth transitions between screens; distinct feedback on tap/hover.
+- **Inspiration**: Similar to "Vinted" - prioritizing ease of listing and discovery without clutter.
+
 ## 3. Data Integrity
 
 - **Validation**: All inputs (Price, Text) must be sanitized to prevent injection attacks.

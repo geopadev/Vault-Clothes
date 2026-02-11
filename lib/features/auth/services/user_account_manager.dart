@@ -11,6 +11,8 @@ class UserAccountManager {
 
   Stream<User?> get authStateChanges => _auth.authStateChanges;
 
+  User? get currentUser => _auth.currentUser;
+
   Future<void> login(String email, String password) async {
     await _auth.signIn(email, password);
   }

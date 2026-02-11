@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vault_clothes/core/services/service_locator.dart';
 import 'package:vault_clothes/features/auth/services/user_account_manager.dart';
 import 'package:vault_clothes/features/auth/views/login_screen.dart';
-import 'package:vault_clothes/features/listings/views/feed_screen.dart';
+import 'package:vault_clothes/features/home/views/main_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -38,9 +38,6 @@ class AuthWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // We can access the auth stream directly from the manager or a simplified provider
-    // For now, let's use a StreamBuilder on the AccountAuthentication service (or Manager)
-    // Note: Ideally this logic lives in a ViewModel, but for the root wrapper, simple stream usage is common.
     final authManager = getIt<UserAccountManager>();
 
     return StreamBuilder<User?>(
@@ -53,7 +50,7 @@ class AuthWrapper extends StatelessWidget {
         }
 
         if (snapshot.hasData) {
-          return const FeedScreen();
+          return const MainScreen();
         }
 
         return const LoginScreen();

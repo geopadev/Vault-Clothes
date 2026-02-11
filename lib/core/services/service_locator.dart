@@ -13,6 +13,9 @@ import 'package:vault_clothes/features/listings/viewmodels/listing_view_model.da
 import 'package:vault_clothes/features/search/viewmodels/search_view_model.dart';
 import 'package:vault_clothes/features/trust/services/trust_info_manager.dart';
 import 'package:vault_clothes/features/trust/viewmodels/profile_view_model.dart';
+import 'package:vault_clothes/features/chat/services/chat_service.dart';
+import 'package:vault_clothes/features/chat/viewmodels/inbox_view_model.dart';
+import 'package:vault_clothes/features/listings/viewmodels/listing_detail_view_model.dart';
 
 final getIt = GetIt.instance;
 
@@ -55,4 +58,9 @@ void setupLocator() {
         getIt<TrustInfoManager>(),
         getIt<ListingService>(),
       ));
+  getIt.registerFactory(() => InboxViewModel(getIt(), getIt()));
+  getIt.registerFactory(() => ListingDetailViewModel(getIt(), getIt()));
+
+  // Chat
+  getIt.registerLazySingleton(() => ChatService(getIt()));
 }
